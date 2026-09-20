@@ -1,108 +1,81 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Meu PC Virtual</title>
 
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+<div class="desktop">
 
-    body {
-      height: 100vh;
-      overflow: hidden;
-      font-family: Arial, sans-serif;
-      background: #202124;
-      color: white;
-    }
+  <div class="icon" onclick="openWindow('Meu Computador')">
+    <div class="icon-box">💻</div>
+    <div class="icon-name">Meu Computador</div>
+  </div>
 
-    .desktop {
-      height: 100vh;
-      padding: 30px;
-      background: linear-gradient(135deg, #172554, #111827, #312e81);
-      position: relative;
-    }
+  <div class="icon" onclick="openWindow('Navegador')">
+    <div class="icon-box">🌐</div>
+    <div class="icon-name">Navegador</div>
+  </div>
 
-    .icon {
-      width: 80px;
-      text-align: center;
-      margin-bottom: 25px;
-      cursor: pointer;
-    }
+  <div class="icon" onclick="openWindow('Arquivos')">
+    <div class="icon-box">📁</div>
+    <div class="icon-name">Arquivos</div>
+  </div>
 
-    .icon-box {
-      font-size: 42px;
-    }
+  <div class="window" id="window">
+    <div class="titlebar">
+      <span id="windowTitle">PC Virtual</span>
+      <span class="close" onclick="closeWindow()">✕</span>
+    </div>
 
-    .icon-name {
-      font-size: 13px;
-      margin-top: 5px;
-    }
+    <div class="content" id="windowContent">
+      Bem-vindo ao seu PC virtual!
+    </div>
+  </div>
 
-    .taskbar {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      height: 55px;
-      background: rgba(20, 20, 20, 0.9);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 20px;
-      backdrop-filter: blur(10px);
-    }
+  <div class="taskbar">
+    <div class="start" onclick="openWindow('Menu Iniciar')">⊞</div>
+    <div class="clock" id="clock"></div>
+  </div>
 
-    .start {
-      font-size: 28px;
-      cursor: pointer;
-    }
+</div>
 
-    .clock {
-      position: absolute;
-      right: 20px;
-      font-size: 14px;
-    }
+<script>
+function openWindow(name) {
+  document.getElementById("window").style.display = "block";
+  document.getElementById("windowTitle").textContent = name;
 
-    .window {
-      display: none;
-      position: absolute;
-      top: 15%;
-      left: 10%;
-      width: 80%;
-      height: 60%;
-      background: white;
-      color: black;
-      border-radius: 10px;
-      overflow: hidden;
-      box-shadow: 0 10px 40px black;
-    }
+  if (name === "Meu Computador") {
+    document.getElementById("windowContent").innerHTML =
+      "<h2>💻 Meu Computador</h2><p>Este é o seu PC virtual.</p>";
+  }
 
-    .titlebar {
-      height: 45px;
-      background: #2563eb;
-      color: white;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 15px;
-    }
+  if (name === "Navegador") {
+    document.getElementById("windowContent").innerHTML =
+      "<h2>🌐 Navegador</h2><p>Seu navegador virtual está pronto.</p>";
+  }
 
-    .close {
-      cursor: pointer;
-      font-size: 22px;
-    }
+  if (name === "Arquivos") {
+    document.getElementById("windowContent").innerHTML =
+      "<h2>📁 Arquivos</h2><p>Nenhum arquivo ainda.</p>";
+  }
 
-    .content {
-      padding: 20px;
-    }
-  </style>
-</head>
+  if (name === "Menu Iniciar") {
+    document.getElementById("windowContent").innerHTML =
+      "<h2>⊞ Menu Iniciar</h2><p>💻 Meu Computador</p><p>🌐 Navegador</p><p>📁 Arquivos</p>";
+  }
+}
 
-<body>
+function closeWindow() {
+  document.getElementById("window").style.display = "none";
+}
 
- 
+function updateClock() {
+  const now = new Date();
+  document.getElementById("clock").textContent =
+    now.toLocaleTimeString("pt-BR", {
+      hour: "2-digit",
+      minute: "2-digit"
+    });
+}
+
+updateClock();
+setInterval(updateClock, 1000);
+</script>
+
+</body>
+</html>
